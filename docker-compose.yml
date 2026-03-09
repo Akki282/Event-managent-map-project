@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: eventmanagement-app
+    ports:
+      - "3000:3000"
+      - "50051:50051"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
