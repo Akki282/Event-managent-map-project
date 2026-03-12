@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package event;
+
+service EventService {
+  rpc CreateEvent (CreateEventRequest) returns (EventResponse);
+  rpc GetEvents (Empty) returns (EventList);
+  rpc GetEventById (EventRequest) returns (EventResponse);
+  rpc AddGuestToEvent (AddGuestRequest) returns (EventResponse);
+  rpc AddVendorToEvent (AddVendorRequest) returns (EventResponse);
+}
+
+message Empty {}
+
+message EventRequest {
+  string id = 1;
+}
+
+message AddGuestRequest {
+  string eventId = 1;
+  string userId = 2;
+}
+
+message AddVendorRequest {
+  string eventId = 1;
+  string vendorId = 2;
+}
+
+message CreateEventRequest {
+  string name = 1;
+  string date = 2;
+  string venue = 3;
+}
+
+message EventResponse {
+  string id = 1;
+  string name = 2;
+  string date = 3;
+  string venue = 4;
+}
+
+message EventList {
+  repeated EventResponse events = 1;
+}

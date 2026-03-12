@@ -7,7 +7,6 @@ const generateOtp = () => {
 
 export const registerUser = async (req, res) => {
   try {
-
     const { name, email, contactNumber } = req.body;
 
     let user = await User.findOne({ email });
@@ -22,25 +21,22 @@ export const registerUser = async (req, res) => {
       name,
       email,
       contactNumber,
-      otp
+      otp,
     });
 
     await user.save();
 
     res.status(201).json({
       message: "User registered successfully",
-      otp
+      otp,
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 export const loginUser = async (req, res) => {
-
   try {
-
     const { email } = req.body;
 
     const user = await User.findOne({ email });
@@ -57,21 +53,15 @@ export const loginUser = async (req, res) => {
 
     res.json({
       message: "OTP sent",
-      otp
+      otp,
     });
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };
 
 export const verifyOtp = async (req, res) => {
-
   try {
-
     const { email, otp } = req.body;
 
     const user = await User.findOne({ email });
@@ -80,11 +70,9 @@ export const verifyOtp = async (req, res) => {
       return res.status(400).json({ message: "Invalid OTP" });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     user.otp = null;
 
@@ -92,13 +80,9 @@ export const verifyOtp = async (req, res) => {
 
     res.json({
       message: "Login successful",
-      token
+      token,
     });
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };

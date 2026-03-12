@@ -1,8 +1,8 @@
 import express from "express";
 import {
-    deleteUser,
-    getUser,
-    updateUser
+  deleteUser,
+  getUser,
+  updateUser,
 } from "../controllers/userController.js";
 
 import { protect } from "../middleware/authMiddleware.js";

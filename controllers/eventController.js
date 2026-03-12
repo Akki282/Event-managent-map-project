@@ -3,52 +3,38 @@ import User from "../models/User.js";
 import Vendor from "../models/Vendor.js";
 
 export const createEvent = async (req, res) => {
-
   try {
-
     const { name, date, venue } = req.body;
 
     const event = new Event({
       name,
       date,
       venue,
-      guests: [req.user._id]
+      guests: [req.user._id],
     });
 
     await event.save();
 
     res.status(201).json(event);
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };
 
 export const getEvents = async (req, res) => {
-
   try {
-
     const events = await Event.find()
       .populate("guests", "name email")
       .populate("vendors", "name type");
 
     res.json(events);
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };
 
 export const getEventById = async (req, res) => {
-
   try {
-
     const event = await Event.findById(req.params.id)
       .populate("guests", "name email")
       .populate("vendors", "name type");
@@ -58,19 +44,13 @@ export const getEventById = async (req, res) => {
     }
 
     res.json(event);
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };
 
 export const addGuestToEvent = async (req, res) => {
-
   try {
-
     const { userId } = req.body;
 
     const event = await Event.findById(req.params.id);
@@ -86,19 +66,13 @@ export const addGuestToEvent = async (req, res) => {
     await event.save();
 
     res.json({ message: "Guest added", event });
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };
 
 export const addVendorToEvent = async (req, res) => {
-
   try {
-
     const { vendorId } = req.body;
 
     const event = await Event.findById(req.params.id);
@@ -114,11 +88,7 @@ export const addVendorToEvent = async (req, res) => {
     await event.save();
 
     res.json({ message: "Vendor added", event });
-
   } catch (error) {
-
     res.status(500).json({ error: error.message });
-
   }
-
 };

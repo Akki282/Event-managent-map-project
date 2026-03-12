@@ -4,7 +4,7 @@ import {
   addVendorToEvent,
   createEvent,
   getEventById,
-  getEvents
+  getEvents,
 } from "../controllers/eventController.js";
 
 import { protect } from "../middleware/authMiddleware.js";

@@ -1,8 +1,8 @@
 import express from "express";
 import {
-    createVendor,
-    getVendorById,
-    getVendors
+  createVendor,
+  getVendorById,
+  getVendors,
 } from "../controllers/vendorController.js";
 
 import { protect } from "../middleware/authMiddleware.js";

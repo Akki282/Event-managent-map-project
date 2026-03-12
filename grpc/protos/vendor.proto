@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package vendor;
+
+service VendorService {
+  rpc CreateVendor (VendorRequest) returns (VendorResponse);
+  rpc GetVendors (Empty) returns (VendorList);
+  rpc GetVendorById (VendorIdRequest) returns (VendorResponse);
+}
+
+message Empty {}
+
+message VendorIdRequest {
+  string id = 1;
+}
+
+enum VendorType {
+  CATERING = 0;
+  DECORATION = 1;
+  PHOTOGRAPHY = 2;
+  MUSIC = 3;
+  LIGHTING = 4;
+}
+
+message VendorRequest {
+  string name = 1;
+  string email = 2;
+  string contactNumber = 3;
+  VendorType type = 4;
+}
+
+message VendorResponse {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string contactNumber = 4;
+  VendorType type = 5;
+}
+
+message VendorList {
+  repeated VendorResponse vendors = 1;
+}

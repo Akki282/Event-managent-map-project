@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: eventmanagement-app
+    container_name: event-management-app
     ports:
       - "3000:3000"
       - "50051:50051"

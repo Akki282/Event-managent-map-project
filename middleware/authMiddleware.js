@@ -2,9 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 export const protect = async (req, res, next) => {
-
   try {
-
     let token;
 
     if (
@@ -16,7 +14,7 @@ export const protect = async (req, res, next) => {
 
     if (!token) {
       return res.status(401).json({
-        message: "Not authorized, token missing"
+        message: "Not authorized, token missing",
       });
     }
 
@@ -25,13 +23,9 @@ export const protect = async (req, res, next) => {
     req.user = await User.findById(decoded.id).select("-otp");
 
     next();
-
   } catch (error) {
-
     return res.status(401).json({
-      message: "Invalid or expired token"
+      message: "Invalid or expired token",
     });
-
   }
-
 };
